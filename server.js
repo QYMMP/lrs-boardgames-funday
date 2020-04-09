@@ -37,13 +37,13 @@ app.post('/room', (req, res) => {
   //   message: req.body.message
   // });
   // res.send('Thanks for your message!');
-  const message = "";
+  let message = "";
   if (typeof req.body.create != "undefined") {
     //create room
-    const room = [];
+    let room = [];
     room["owner"] = req.body.name;
     room["participant_list"] = [req.body.name];
-    const roomID = makeid(5);
+    let roomID = makeid(5);
     while (typeof roomlist[roomID] != "undefined") {
       roomID = makeid(5);
     }
@@ -85,5 +85,3 @@ function makeid(length) {
   }
   return result;
 }
-
-console.log(makeid(5));
