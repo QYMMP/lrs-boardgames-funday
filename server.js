@@ -57,7 +57,7 @@ app.post('/room', (req, res) => {
       res.send(`Room ID (${req.body.room}) does not exist`);
     }
   }
-  res.end(util.inspect(roomlist));
+  res.send(util.inspect(roomlist));
 });
 
 // Start the server
