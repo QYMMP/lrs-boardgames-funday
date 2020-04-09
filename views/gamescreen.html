@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>狼人杀</title>
+    <script src="../client.js"></script>
+</head>
+
+<body>
+    <h2>狼人杀</h2>
+    <div id="chatarea">
+        <div id="chatlog">
+
+        </div>
+        <div id="chatsubmit">
+            
+        </div>
+    </div>
+    <form id="room-form" method="POST" action="/room">
+        <div>
+            <input type="text" name="name" placeholder="Name">
+        </div>
+        <div>
+            <input type="text" name="room" placeholder="Room ID">
+        </div>
+        <div>
+            <button type="submit" id="create" name="create">Create Room</button>
+            <button type="submit" id="join" name="join">Join Room</button>
+            <input type="hidden" id="proxy-submit-button">
+        </div>
+    </form>
+</body>
+
+</html>

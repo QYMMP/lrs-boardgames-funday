@@ -31,6 +31,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/views/mainmenu.html'));
 });
 
+app.get('/getChatLog', (req, res) => {
+
+});
+
 app.post('/room', (req, res) => {
   // console.log({
   //   name: req.body.name,
@@ -43,6 +47,8 @@ app.post('/room', (req, res) => {
     let room = [];
     room["owner"] = req.body.name;
     room["participant_list"] = [req.body.name];
+    room["wolf_log"] = [];
+
     let roomID = makeid(5);
     while (typeof roomlist[roomID] != "undefined") {
       roomID = makeid(5);
@@ -55,9 +61,9 @@ app.post('/room', (req, res) => {
     //join room
     if (typeof roomlist[req.body.room] != "undefined") {
       roomlist[req.body.room]["participant_list"].push(req.body.name);
-      res.send(`Joined Room!`);
+      message += `Joined Room!`;
     } else {
-      res.send(`Room ID (${req.body.room}) does not exist`);
+      message += `Room ID (${req.body.room}) does not exist`;
     }
   }
   // res.send(util.inspect(roomlist));
