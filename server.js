@@ -37,6 +37,7 @@ app.post('/room', (req, res) => {
   //   message: req.body.message
   // });
   // res.send('Thanks for your message!');
+  const message = "";
   if (typeof req.body.create != "undefined") {
     //create room
     const room = [];
@@ -47,7 +48,9 @@ app.post('/room', (req, res) => {
       roomID = makeid(5);
     }
     roomlist[roomID] = room;
-    res.send(`Room created! Room ID: ${roomID}`)
+
+    // res.send(`Room created! Room ID: ${roomID}`);
+    message += `Room created! Room ID: ${roomID}`;
   } else if (typeof req.body.join != "undefined") {
     //join room
     if (typeof roomlist[req.body.room] != "undefined") {
@@ -57,7 +60,9 @@ app.post('/room', (req, res) => {
       res.send(`Room ID (${req.body.room}) does not exist`);
     }
   }
-  res.send(util.inspect(roomlist));
+  // res.send(util.inspect(roomlist));
+  message += util.inspect(roomlist);
+  res.send(message);
 });
 
 // Start the server
