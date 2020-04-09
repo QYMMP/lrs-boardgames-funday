@@ -18,7 +18,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require(`path`);
-
+const util = require(`util`);
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -51,7 +51,7 @@ app.post('/room', (req, res) => {
   } else if (typeof req.body.join != "undefined") {
     //join room
     if (typeof roomlist[req.body.room] != "undefined") {
-      room["participant_list"].push(req.body.name);
+      roomlist[req.body.room]["participant_list"].push(req.body.name);
       res.send(`Joined Room!`);
     } else {
       res.send(`Room ID (${req.body.room}) does not exist`);
