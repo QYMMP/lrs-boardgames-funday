@@ -19,6 +19,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require(`path`);
 
+
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -30,31 +31,33 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/views/mainmenu.html'));
 });
 
-app.get('/hello', (req, res) => {
-    counter++;
-    res.status(200).send('Times entered: ' + counter).end();
-});
-
-app.get('/submit', (req, res) => {
-  res.sendFile(path.join(__dirname, '/views/form.html'));
-});
-
-app.post('/submit', (req, res) => {
-  console.log({
-    name: req.body.name,
-    message: req.body.message
-  });s
-  res.send('Thanks for your message!');
-});
-
 app.post('/room', (req, res) => {
   // console.log({
   //   name: req.body.name,
   //   message: req.body.message
   // });
   // res.send('Thanks for your message!');
-  res.send(req.body.proxy-submit-button);
-  // roomlist.push();
+  if (typeof req.body.create != "undefined") {
+    //create room
+    const room = [];
+    room["owner"] = req.body.name;
+    room["participant_list"] = [req.body.name];
+    const roomID = makeid(5);
+    while (typeof roomlist[roomID] != "undefined") {
+      roomID = makeid(5);
+    }
+    roomlist[roomID] = room;
+    res.send(`Room created! Room ID: ${roomID}`)
+  } else if (typeof req.body.join != "undefined") {
+    //join room
+    if (typeof roomlist[req.body.room] != "undefined") {
+      room["participant_list"].push(req.body.name);
+      res.send(`Joined Room!`);
+    } else {
+      res.send(`Room ID (${req.body.room}) does not exist`);
+    }
+  }
+  res.end(util.inspect(roomlist));
 });
 
 // Start the server
@@ -66,3 +69,16 @@ app.listen(PORT, () => {
 // [END gae_node_request_example]
 
 module.exports = app;
+
+
+function makeid(length) {
+  var result = '';
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
+console.log(makeid(5));
