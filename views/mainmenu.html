@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My App Engine App</title>
+    <script>
+        var createButton = document.getElementById('create');
+        var joinButton = document.getElementById('join');
+        var proxySubmitButton = document.getElementById('proxy-submit-button');
+        var roomForm = document.getElementById('room-form');
+
+        var submitForm = function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            /* set the proxy button value */
+            proxySubmitButton.value = this.value;
+            /* set the proxy button name */
+            proxySubmitButton.name = this.name;
+            roomForm.submit();
+        };
+
+        createButton.addEventListener('click', submitForm, false);
+        joinButton.addEventListener('click', submitForm, false);
+    </script>
+</head>
+
+<body>
+    <h2>Create a new post</h2>
+    <form id="room-form" method="POST" action="/room">
+        <div>
+            <input type="text" name="name" placeholder="Name">
+        </div>
+        <div>
+            <input type="text" name="room" placeholder="Room ID">
+        </div>
+        <div>
+            <button type="submit" id="create" name="create">Create Room</button>
+            <button type="submit" id="join" name="join">Join Room</button>
+            <input type="hidden" id="proxy-submit-button">
+        </div>
+    </form>
+</body>
+
+</html>

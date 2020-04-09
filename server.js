@@ -23,9 +23,11 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
 var counter = 0;
+var roomlist = [];
+
 
 app.get('/', (req, res) => {
-  res.status(200).send('Time to get ready for LRS').end();
+  res.sendFile(path.join(__dirname, '/views/mainmenu.html'));
 });
 
 app.get('/hello', (req, res) => {
@@ -41,8 +43,18 @@ app.post('/submit', (req, res) => {
   console.log({
     name: req.body.name,
     message: req.body.message
-  });
+  });s
   res.send('Thanks for your message!');
+});
+
+app.post('/room', (req, res) => {
+  // console.log({
+  //   name: req.body.name,
+  //   message: req.body.message
+  // });
+  // res.send('Thanks for your message!');
+  res.send(req.body.proxy-submit-button);
+  // roomlist.push();
 });
 
 // Start the server
