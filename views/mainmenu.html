@@ -4,11 +4,6 @@
 <head>
     <title>狼人杀</title>
     <script src="client.js"></script>
-
-    <script>
-        createButton.addEventListener('click', submitForm, false);
-        joinButton.addEventListener('click', submitForm, false);
-    </script>
 </head>
 
 <body>
@@ -25,6 +20,14 @@
             <button type="submit" id="join" name="join">Join Room</button>
         </div>
     </form>
+    <script>
+        let createButton = document.getElementById('create');
+        let joinButton = document.getElementById('join');
+        createButton.addEventListener('click', submitForm, false);
+        joinButton.addEventListener('click', submitForm, false);
+    </script>
 </body>
+
+
 
 </html>
