@@ -53,9 +53,9 @@ app.post('/redirect', (req, res) => {
       break;
   }
   if (result.status === "S") {
-    let nonce = makeid(10);
+    let nonce = makeid(10, 'm');
     while (securityNonce.includes(nonce)) {
-      nonce = makeid(10);
+      nonce = makeid(10, 'm');
     }
     securityNonce.push(nonce);
     result.nonce = nonce;
@@ -72,9 +72,9 @@ function createRoom(req) {
   room["participant_list"] = [req.body.name];
   room["wolflog"] = [];
 
-  let roomID = makeid(5);
+  let roomID = makeid(5, 'n');
   while (typeof roomlist[roomID] != "undefined") {
-    roomID = makeid(5);
+    roomID = makeid(5, 'n');
   }
   roomlist[roomID] = room;
   result.player = req.body.name;
@@ -141,9 +141,21 @@ app.listen(PORT, () => {
 module.exports = app;
 
 
-function makeid(length) {
+function makeid(length, mode) {
+  var characters = '';
+
+  switch (mode) {
+    case 'a':
+      characters = 'abcdefghijklmnopqrstuvwxyz';
+      break;
+    case 'n':
+      characters = '0123456789';
+      break;
+    case 'm':
+      characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+      break;
+  }
   var result = '';
-  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   var charactersLength = characters.length;
   for (var i = 0; i < length; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
