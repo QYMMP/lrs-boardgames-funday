@@ -58,7 +58,7 @@ function redirect(params) {
                 }
                 if (typeof (data.wolflog) !== 'undefined') {
                     let message = "";
-                    result.forEach(element => {
+                    data.wolflog.forEach(element => {
                         message += element;
                         message += '<br>';
                     });
