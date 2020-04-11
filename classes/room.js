@@ -6,3 +6,5 @@ class Room{
         this.wolflog = [];
     }
 }
+
+module.exports = Room;

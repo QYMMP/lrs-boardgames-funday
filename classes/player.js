@@ -3,3 +3,5 @@ class Player {
         this.name = name;
     }
 }
+
+module.exports = Player;
