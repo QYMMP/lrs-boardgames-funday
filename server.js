@@ -27,12 +27,24 @@ app.use(express.static('public'));
 var counter = 0;
 var roomlist = [];
 
+var securityNonce = [];
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/views/mainmenu.html'));
 });
 
 app.get('/getChatLog', (req, res) => {
 
+});
+
+app.post('/room', (req, res) => {
+  let index = securityNonce.indexOf(req.nonce);
+  if (index >= 0) {
+    securityNonce.splice(index, 1);
+    res.send(`In Room ID: ${req.roomID}`);
+  } else {
+    res.send("Bad activity detected");
+  }
 });
 
 app.post('/redirect', (req, res) => {
@@ -45,8 +57,16 @@ app.post('/redirect', (req, res) => {
       result = joinRoom(req);
       break;
   }
+  if (result.status === "S") {
+    let nonce = makeid(10);
+    while (securityNonce.includes(nonce)) {
+      nonce = makeid(10);
+    }
+    securityNonce.push(nonce);
+  }
+
   res.send(JSON.stringify(result));
-})
+});
 
 function createRoom(req) {
   //create room
@@ -63,6 +83,8 @@ function createRoom(req) {
   roomlist[roomID] = room;
   result.message = `Room created! Room ID: ${roomID}`;
   result.debug = util.inspect(roomlist);
+  result.redirect = "room";
+  result.roomID = roomID;
   result.status = "S";
 
   return result;
@@ -74,6 +96,8 @@ function joinRoom(req) {
   if (typeof roomlist[req.body.room] != "undefined") {
     roomlist[req.body.room]["participant_list"].push(req.body.name);
     result.message = `Joined Room!`;
+    result.redirect = "room";
+    result.roomID = roomID;
     result.status = "S";
   } else {
     result.message = `Room ID (${req.body.room}) does not exist`;

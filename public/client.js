@@ -1,47 +1,11 @@
 function fetch_chatlog(roomID) {
-    // const params = prepareUpdateData();
-    // let options = {};
-    // options.body = params;
-    // options.method = "POST";
-    // options.headers = {
-    //     "Content-Type": "application/x-www-form-urlencoded"
-    // };
-    // options.credentials = "same-origin";
-
-    // fetch(ajaxurl, options)
-    //     .then(r => r.json())
-    //     .then(data => {
-    //         switch (data["status_flag"]) {
-    //             case "S":
-    //                 if (
-    //                     data.hasOwnProperty("colHeaders") ||
-    //                     data.hasOwnProperty("rowHeaders")
-    //                 )
-    //                     updateHeaders(data);
-    //                 initTrackers();
-    //             default:
-    //                 alert(data.msg);
-    //         }
-    //         hideLoading();
-    //     });
-    // options.body = params;
-    // options.method = "POST";
-    // // options.headers = {
-    // //     "Content-Type": "application/x-www-form-urlencoded"
-    // // };
-
-    // fetch(window.location.hostname + '/getChatLog', options)
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.log(data)
-    //     })
-    //     .catch(err => ...)
+    
 }
 
 function submitForm() {
-    let params = {};
-    let options = {};
     let action = this.id;
+
+    let params = {};
     params.action = action;
     switch (action) {
         case "create":
@@ -52,16 +16,40 @@ function submitForm() {
             params.room = document.getElementById("room").value;
             break;
     }
+
+    let options = {};
     options.body = JSON.stringify(params);
     options.method = "POST";
     options.headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     };
-    fetch(window.location.hostname + '/redirect', options)
+    fetch('/redirect', options)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            console.log(data);
+            if (data.status === "S" && typeof(data.redirect) !== 'undefined') {
+                loadPage(data);
+            }
+        })
+        .catch(err => {
+
+        });
+}
+
+function loadPage(req) {
+    let redirect = "/" + req.redirect;
+    let options = {};
+    options.body = JSON.stringify(req);
+    options.method = "POST";
+    options.headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    };
+    fetch(redirect, options)
+        .then(response => response.json())
+        .then(data => {
+            document.body = data;
         })
         .catch(err => {
 
