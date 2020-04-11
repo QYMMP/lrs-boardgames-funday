@@ -1,22 +1,9 @@
-function fetch_chatlog(roomID) {
-    // resolve('resolved');
+function refreshChatLog(roomID) {
     let params = {};
     params.action = "chatlog";
     params.roomID = roomID;
-    result = redirect(params);
-    return result.wolflog;
-}
-
-async function getChatLog(roomID) {
-    let chatlog = document.getElementById("chatlog");
-
-    let result = await fetch_chatlog(roomID);
-    let message = "";
-    result.forEach(element => {
-        message += element;
-        message += '<br>';
-    });
-    chatlog.innerHTML = message;
+    
+    redirect(params);
 }
 
 var inRoom = false;
@@ -24,9 +11,9 @@ var roomID = "";
 
 setInterval(function () {
     if (inRoom) {
-        getChatLog(roomID);
+        refreshChatLog(roomID);
     }
-}, 3000);
+}, 5000);
 
 function submitForm() {
     let params = {};
@@ -66,7 +53,19 @@ function redirect(params) {
             if (data.status === "S") {
                 if (typeof (data.redirect) !== 'undefined') {
                     roomID = data.roomID;
+                    inRoom = true;
                     loadPage(data);
+                }
+                if (typeof (data.wolflog) !== 'undefined'){
+                    let chatlog = document.getElementById("chatlog");
+
+                    let message = "";
+                    result.forEach(element => {
+                        message += element;
+                        message += '<br>';
+                    });
+
+                    chatlog.innerHTML = message;
                 }
                 if (typeof (data.clearChatInput) !== 'undefined') {
                     document.getElementById("chat-input").value = "";
