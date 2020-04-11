@@ -18,9 +18,13 @@ function updatePage(room){
     document.getElementById("chatlog").innerHTML = message;
 
     let playerlist = "";
-    room.participantList.forEach(element => {
-        playerlist += element;
+    let playercount = 1;
+    room.participantList.forEach(participant => {
+        playerlist += playercount;
+        playerlist += ". "
+        playerlist += participant.name;
         playerlist += '<br>';
+        playercount++;
     });
     document.getElementById("player-list").innerHTML = playerlist;
 }
