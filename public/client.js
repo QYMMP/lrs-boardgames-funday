@@ -43,13 +43,12 @@ function loadPage(req) {
     options.body = JSON.stringify(req);
     options.method = "POST";
     options.headers = {
-        'Accept': 'application/json',
         'Content-Type': 'application/json'
     };
     fetch(redirect, options)
-        .then(response => response.json())
+        .then(response => response.text())
         .then(data => {
-            document.body = data;
+            document.getElementById("contentDiv").innerHTML = data;
         })
         .catch(err => {
 

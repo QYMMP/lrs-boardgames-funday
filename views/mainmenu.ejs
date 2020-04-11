@@ -7,23 +7,25 @@
 </head>
 
 <body>
-    <h2>狼人杀</h2>
-    <div>
-        <input type="text" id="name" placeholder="Name">
+    <div id="contentDiv">
+        <h2>狼人杀</h2>
+        <div>
+            <input type="text" id="name" placeholder="Name">
+        </div>
+        <div>
+            <input type="text" id="room" placeholder="Room ID">
+        </div>
+        <div>
+            <button id="create">Create Room</button>
+            <button id="join">Join Room</button>
+        </div>
+        <script>
+            let createButton = document.getElementById('create');
+            let joinButton = document.getElementById('join');
+            createButton.addEventListener('click', submitForm, false);
+            joinButton.addEventListener('click', submitForm, false);
+        </script>
     </div>
-    <div>
-        <input type="text" id="room" placeholder="Room ID">
-    </div>
-    <div>
-        <button id="create">Create Room</button>
-        <button id="join">Join Room</button>
-    </div>
-    <script>
-        let createButton = document.getElementById('create');
-        let joinButton = document.getElementById('join');
-        createButton.addEventListener('click', submitForm, false);
-        joinButton.addEventListener('click', submitForm, false);
-    </script>
 </body>
 
 
