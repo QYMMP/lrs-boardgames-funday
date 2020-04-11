@@ -49,14 +49,14 @@ function redirect(params) {
     fetch('/redirect', options)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             if (data.status === "S") {
+                console.log("success");
+                console.log(data);
                 if (typeof (data.redirect) !== 'undefined') {
-                    roomID = data.roomID;
-                    inRoom = true;
                     loadPage(data);
                 }
                 if (typeof (data.wolflog) !== 'undefined'){
+                    console.log("output log");
                     let chatlog = document.getElementById("chatlog");
 
                     let message = "";
@@ -64,7 +64,7 @@ function redirect(params) {
                         message += element;
                         message += '<br>';
                     });
-
+                    console.log(message);
                     chatlog.innerHTML = message;
                 }
                 if (typeof (data.clearChatInput) !== 'undefined') {
@@ -93,6 +93,8 @@ function loadPage(req) {
             document.getElementById("contentDiv").innerHTML = data;
             let chatSubmitButton = document.getElementById("chat-submit");
             chatSubmitButton.addEventListener('click', submitForm, false);
+            roomID = data.roomID;
+            inRoom = true;
         })
         .catch(err => {
 
