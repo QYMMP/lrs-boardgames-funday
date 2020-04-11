@@ -23,7 +23,7 @@ const util = require(`util`);
 const app = express();
 // app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+app.use(express.static('public'));
 var counter = 0;
 var roomlist = [];
 
