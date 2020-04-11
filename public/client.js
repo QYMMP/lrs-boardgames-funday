@@ -57,14 +57,12 @@ function redirect(params) {
                     inRoom = true;
                 }
                 if (typeof (data.wolflog) !== 'undefined') {
-                    let chatlog = document.getElementById("chatlog");
-
                     let message = "";
                     result.forEach(element => {
                         message += element;
                         message += '<br>';
                     });
-                    chatlog.innerHTML = message;
+                    document.getElementById("chatlog").innerHTML = message;
                 }
                 if (typeof (data.clearChatInput) !== 'undefined') {
                     document.getElementById("chat-input").value = "";
