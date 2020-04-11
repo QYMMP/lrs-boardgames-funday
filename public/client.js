@@ -90,6 +90,20 @@ function loadPage(req) {
             document.getElementById("contentDiv").innerHTML = data;
             let chatSubmitButton = document.getElementById("chat-submit");
             chatSubmitButton.addEventListener('click', submitForm, false);
+
+            // Get the input field
+            let chatInput = document.getElementById("chat-input");
+
+            // Execute a function when the user releases a key on the keyboard
+            chatInput.addEventListener("keyup", function (event) {
+                // Number 13 is the "Enter" key on the keyboard
+                if (event.keyCode === 13) {
+                    // Cancel the default action, if needed
+                    event.preventDefault();
+                    // Trigger the button element with a click
+                    chatSubmitButton.click();
+                }
+            });
         })
         .catch(err => {
 
