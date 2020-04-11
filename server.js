@@ -36,7 +36,7 @@ app.post('/room', (req, res) => {
     securityNonce.splice(index, 1);
     let options = {};
     options.roomID = req.body.roomID;
-    options.player = req.body.player;
+    options.player = req.body.player.name;
     res.render("gamescreen", options);
   } else {
     res.send("Bad activity detected");
@@ -98,7 +98,7 @@ function joinRoom(req) {
   let result = {};
   if (typeof roomlist[req.body.room] != "undefined") {
     let player = new Player(req.body.name);
-    roomlist[req.body.room]["participantList"].push(player);
+    roomlist[req.body.room].participantList.push(player);
     result.player = player;
     result.message = `Joined Room!`;
     result.redirect = "room";
