@@ -8,18 +8,16 @@
 
 <body>
     <h2>狼人杀</h2>
-    <form id="room-form" method="POST" action="/room">
-        <div>
-            <input type="text" name="name" placeholder="Name">
-        </div>
-        <div>
-            <input type="text" name="room" placeholder="Room ID">
-        </div>
-        <div>
-            <button type="submit" id="create" name="create">Create Room</button>
-            <button type="submit" id="join" name="join">Join Room</button>
-        </div>
-    </form>
+    <div>
+        <input type="text" name="name" placeholder="Name">
+    </div>
+    <div>
+        <input type="text" name="room" placeholder="Room ID">
+    </div>
+    <div>
+        <button id="create" name="create">Create Room</button>
+        <button id="join" name="join">Join Room</button>
+    </div>
     <script>
         let createButton = document.getElementById('create');
         let joinButton = document.getElementById('join');
