@@ -83,7 +83,7 @@ function createRoom(req) {
   }
   roomlist[roomID] = room;
 
-  result.player = owner;
+  result.player = player;
   result.message = `Room created! Room ID: ${roomID}`;
   result.debug = util.inspect(roomlist);
   result.redirect = "room";
