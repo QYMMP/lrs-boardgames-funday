@@ -92,6 +92,8 @@ function loadPage(req) {
         .then(response => response.text())
         .then(data => {
             document.getElementById("contentDiv").innerHTML = data;
+            let chatSubmitButton = document.getElementById("chat-submit");
+            chatSubmitButton.addEventListener('click', submitForm, false);
         })
         .catch(err => {
 
