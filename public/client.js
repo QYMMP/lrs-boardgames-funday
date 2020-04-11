@@ -2,7 +2,7 @@ function refreshChatLog(roomID) {
     let params = {};
     params.action = "chatlog";
     params.roomID = roomID;
-    
+
     redirect(params);
 }
 
@@ -49,14 +49,14 @@ function redirect(params) {
     fetch('/redirect', options)
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             if (data.status === "S") {
-                console.log("success");
-                console.log(data);
                 if (typeof (data.redirect) !== 'undefined') {
                     loadPage(data);
+                    roomID = data.roomID;
+                    inRoom = true;
                 }
-                if (typeof (data.wolflog) !== 'undefined'){
-                    console.log("output log");
+                if (typeof (data.wolflog) !== 'undefined') {
                     let chatlog = document.getElementById("chatlog");
 
                     let message = "";
@@ -93,8 +93,6 @@ function loadPage(req) {
             document.getElementById("contentDiv").innerHTML = data;
             let chatSubmitButton = document.getElementById("chat-submit");
             chatSubmitButton.addEventListener('click', submitForm, false);
-            roomID = data.roomID;
-            inRoom = true;
         })
         .catch(err => {
 
