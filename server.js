@@ -56,6 +56,7 @@ app.post('/redirect', (req, res) => {
       nonce = makeid(10);
     }
     securityNonce.push(nonce);
+    result.nonce = nonce;
   }
 
   res.send(JSON.stringify(result));
