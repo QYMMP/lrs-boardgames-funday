@@ -28,7 +28,7 @@ async function getChatLog(roomID) {
 function submitForm() {
     let params = {};
     params.action = this.id;
-    redirect(action);
+    redirect(params);
 }
 
 function redirect(params) {

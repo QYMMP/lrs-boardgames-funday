@@ -9,15 +9,15 @@
         </div>
         <div id="div-chat-entry">
             <input type="textarea" id="chat-input">
-            <button id="chat-submit"/>
+            <button id="chat-submit">Send</button>
         </div>
     </div>
     <div id="player-list">
 
     </div>
 </div>
-<input type="hidden" id="roomID"><%= roomID %></input>
-<input type="hidden" id="player"><%= player %></input>
+<input type="hidden" id="roomID" value="<%= roomID %>">
+<input type="hidden" id="player" value="<%= player %>">
 
 <script>
     let chatSubmitButton = document.getElementById("chat-submit");
