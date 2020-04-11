@@ -2,24 +2,22 @@
 <div id="room-info">
     <h1>Room ID: <%= roomID %></h1>
 </div>
-<div id="chatarea">
-    <div id="chatlog">
-
+<div id="game-body">
+    <div id="chatarea">
+        <div id="chatlog">
+        
+        </div>
+        <div id="div-chat-entry">
+            <input type="textarea" id="chat-input">
+            <button id="chat-submit"/>
+        </div>
     </div>
-    <div id="chatsubmit">
+    <div id="player-list">
 
     </div>
 </div>
-<form id="room-form" method="POST" action="/room">
-    <div>
-        <input type="text" name="name" placeholder="Name">
-    </div>
-    <div>
-        <input type="text" name="room" placeholder="Room ID">
-    </div>
-    <div>
-        <button type="submit" id="create" name="create">Create Room</button>
-        <button type="submit" id="join" name="join">Join Room</button>
-        <input type="hidden" id="proxy-submit-button">
-    </div>
-</form>
+
+<script>
+    let chatSubmitButton = document.getElementById("chat-submit");
+    chatSubmitButton.addEventListener('click', submitForm, false);
+</script>
