@@ -3,26 +3,12 @@
 
 <head>
     <title>狼人杀</title>
+    <script src="../client.js"></script>
+
     <script>
-        var createButton = document.getElementById('create');
-        var joinButton = document.getElementById('join');
-        var proxySubmitButton = document.getElementById('proxy-submit-button');
-        var roomForm = document.getElementById('room-form');
-
-        var submitForm = function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            /* set the proxy button value */
-            proxySubmitButton.value = this.value;
-            /* set the proxy button name */
-            proxySubmitButton.name = this.name;
-            roomForm.submit();
-        };
-
         createButton.addEventListener('click', submitForm, false);
         joinButton.addEventListener('click', submitForm, false);
     </script>
-    <script src="../client.js"></script>
 </head>
 
 <body>
@@ -37,7 +23,6 @@
         <div>
             <button type="submit" id="create" name="create">Create Room</button>
             <button type="submit" id="join" name="join">Join Room</button>
-            <input type="hidden" id="proxy-submit-button">
         </div>
     </form>
 </body>

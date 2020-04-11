@@ -38,10 +38,11 @@ function fetch_chatlog(roomID) {
     //     .catch(err => ...)
 }
 
-function submitForm(button) {
+function submitForm() {
     let params = {};
-    params.action = button.id;
-    switch (button.id) {
+    let action = this.id;
+    params.action = action;
+    switch (action) {
         case "create":
             params.name = document.getElementById("name").value;
             break;
