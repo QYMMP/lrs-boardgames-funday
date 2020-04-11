@@ -13,7 +13,7 @@ setInterval(function () {
     if (inRoom) {
         refreshChatLog(roomID);
     }
-}, 5000);
+}, 1000);
 
 function submitForm() {
     let params = {};
