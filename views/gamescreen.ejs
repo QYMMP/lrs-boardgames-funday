@@ -16,8 +16,12 @@
 
     </div>
 </div>
+<input type="hidden" id="roomID"><%= roomID %></input>
+<input type="hidden" id="player"><%= player %></input>
 
 <script>
     let chatSubmitButton = document.getElementById("chat-submit");
     chatSubmitButton.addEventListener('click', submitForm, false);
+
+    getChatLog(roomID);
 </script>

@@ -1,12 +1,34 @@
 function fetch_chatlog(roomID) {
-    
+    return new Promise(resolve => {
+        // resolve('resolved');
+        let params = {};
+        params.action = "chatlog";
+        params.roomID = roomID;
+        result = redirect(params);
+        resolve(result.wolflog);
+    });
+}
+
+async function getChatLog(roomID) {
+    let chatlog = document.getElementById("chatlog");
+
+    while (true) {
+        setTimeout(() => {
+            let result = await fetch_chatlog(roomID);
+            chatlog.innerHTML = result;
+        }, 5000);
+    }
 }
 
 function submitForm() {
-    let action = this.id;
-
     let params = {};
-    params.action = action;
+    params.action = this.id;
+    redirect(action);
+}
+
+function redirect(params) {
+    let action = params.action;
+
     switch (action) {
         case "create":
             params.name = document.getElementById("name").value;
@@ -14,6 +36,11 @@ function submitForm() {
         case "join":
             params.name = document.getElementById("name").value;
             params.room = document.getElementById("room").value;
+            break;
+        case "chat-submit":
+            params.player = document.getElementById("player").value;
+            params.room = document.getElementById("roomID").value;
+            params.msg = document.getElementById("chat-input").value;
             break;
     }
 
@@ -28,9 +55,16 @@ function submitForm() {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            if (data.status === "S" && typeof(data.redirect) !== 'undefined') {
-                loadPage(data);
+            if (data.status === "S") {
+                if (typeof (data.redirect) !== 'undefined') {
+                    loadPage(data);
+                }
+                if (typeof(data.clearChatInput) !== 'undefined') {
+                    document.getElementById("chat-input").value = "";
+                }
             }
+
+            return data;
         })
         .catch(err => {
 
