@@ -1,29 +1,32 @@
 function fetch_chatlog(roomID) {
-    return new Promise(resolve => {
-        // resolve('resolved');
-        let params = {};
-        params.action = "chatlog";
-        params.roomID = roomID;
-        result = redirect(params);
-        resolve(result.wolflog);
-    });
+    // resolve('resolved');
+    let params = {};
+    params.action = "chatlog";
+    params.roomID = roomID;
+    result = redirect(params);
+    return result.wolflog;
 }
 
 async function getChatLog(roomID) {
     let chatlog = document.getElementById("chatlog");
 
-    while (true) {
-        let result = await fetch_chatlog(roomID);
-        setTimeout(() => {
-            let message = "";
-            result.forEach(element => {
-                message += element;
-                message += '<br>';
-            });
-            chatlog.innerHTML = message;
-        }, 5000);
-    }
+    let result = await fetch_chatlog(roomID);
+    let message = "";
+    result.forEach(element => {
+        message += element;
+        message += '<br>';
+    });
+    chatlog.innerHTML = message;
 }
+
+var inRoom = false;
+var roomID = "";
+
+setInterval(function () {
+    if (inRoom) {
+        getChatLog(roomID);
+    }
+}, 3000);
 
 function submitForm() {
     let params = {};
@@ -62,9 +65,10 @@ function redirect(params) {
             console.log(data);
             if (data.status === "S") {
                 if (typeof (data.redirect) !== 'undefined') {
+                    roomID = data.roomID;
                     loadPage(data);
                 }
-                if (typeof(data.clearChatInput) !== 'undefined') {
+                if (typeof (data.clearChatInput) !== 'undefined') {
                     document.getElementById("chat-input").value = "";
                 }
             }
@@ -88,8 +92,6 @@ function loadPage(req) {
         .then(response => response.text())
         .then(data => {
             document.getElementById("contentDiv").innerHTML = data;
-            let chatSubmitButton = document.getElementById("chat-submit");
-            chatSubmitButton.addEventListener('click', submitForm, false);
         })
         .catch(err => {
 
