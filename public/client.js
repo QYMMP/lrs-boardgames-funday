@@ -40,6 +40,7 @@ function fetch_chatlog(roomID) {
 
 function submitForm() {
     let params = {};
+    let options = {};
     let action = this.id;
     params.action = action;
     switch (action) {
