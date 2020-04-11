@@ -8,8 +8,7 @@ function syncGameState(){
     redirect(params);
 }
 
-function updatePage(data){
-    let room = data.room;
+function updatePage(room){
     //chatlog
     let message = "";
     room.chatlog.forEach(element => {
@@ -73,8 +72,8 @@ function redirect(params) {
                     roomID = data.roomID;
                     inRoom = true;
                 }
-                if (typeof (data.wolflog) !== 'undefined') {
-                    updatePage(data);
+                if (typeof (data.room) !== 'undefined') {
+                    updatePage(data.room);
                 }
                 if (typeof (data.clearChatInput) !== 'undefined') {
                     document.getElementById("chat-input").value = "";
