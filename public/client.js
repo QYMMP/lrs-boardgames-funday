@@ -1,17 +1,34 @@
-function refreshChatLog(roomID) {
-    let params = {};
-    params.action = "chatlog";
-    params.roomID = roomID;
-
-    redirect(params);
-}
-
 var inRoom = false;
 var roomID = "";
 
+function syncGameState(){
+    let params = {};
+    params.action = "gamestate";
+    params.roomID = roomID;
+    redirect(params);
+}
+
+function updatePage(data){
+    let room = data.room;
+    //chatlog
+    let message = "";
+    room.chatlog.forEach(element => {
+        message += element;
+        message += '<br>';
+    });
+    document.getElementById("chatlog").innerHTML = message;
+
+    let playerlist = "";
+    room.participantList.forEach(element => {
+        playerlist += element;
+        playerlist += '<br>';
+    });
+    document.getElementById("player-list").innerHTML = playerlist;
+}
+
 setInterval(function () {
     if (inRoom) {
-        refreshChatLog(roomID);
+        syncGameState();
     }
 }, 1000);
 
@@ -57,12 +74,7 @@ function redirect(params) {
                     inRoom = true;
                 }
                 if (typeof (data.wolflog) !== 'undefined') {
-                    let message = "";
-                    data.wolflog.forEach(element => {
-                        message += element;
-                        message += '<br>';
-                    });
-                    document.getElementById("chatlog").innerHTML = message;
+                    updatePage(data);
                 }
                 if (typeof (data.clearChatInput) !== 'undefined') {
                     document.getElementById("chat-input").value = "";

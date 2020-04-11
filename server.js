@@ -6,6 +6,10 @@ const bodyParser = require('body-parser');
 const path = require(`path`);
 const util = require(`util`);
 
+//require custom classes
+const Player = require('./classes/player.js');
+const Room = require('./classes/room.js');
+
 //setup ExpressJS
 //body parser to parse JSON
 //serve static files
@@ -30,7 +34,10 @@ app.post('/room', (req, res) => {
   let index = securityNonce.indexOf(req.body.nonce);
   if (index >= 0) {
     securityNonce.splice(index, 1);
-    res.render("gamescreen", { roomID: req.body.roomID, player: req.body.player });
+    let options = {};
+    options.roomID = req.body.roomID;
+    options.player = req.body.player;
+    res.render("gamescreen", options);
   } else {
     res.send("Bad activity detected");
   }
@@ -45,8 +52,8 @@ app.post('/redirect', (req, res) => {
     case "join":
       result = joinRoom(req);
       break;
-    case "chatlog":
-      result = getChatLog(req);
+    case "gamestate":
+      result = getGameState(req);
       break;
     case "chat-submit":
       result = updateChatLog(req);
@@ -67,17 +74,16 @@ app.post('/redirect', (req, res) => {
 function createRoom(req) {
   //create room
   let result = {};
-  let room = [];
-  room["owner"] = req.body.name;
-  room["participant_list"] = [req.body.name];
-  room["wolflog"] = [];
+  let player = new Player(req.body.name);
+  let room = new Room(player);
 
   let roomID = makeid(5, 'n');
   while (typeof roomlist[roomID] != "undefined") {
     roomID = makeid(5, 'n');
   }
   roomlist[roomID] = room;
-  result.player = req.body.name;
+
+  result.player = owner;
   result.message = `Room created! Room ID: ${roomID}`;
   result.debug = util.inspect(roomlist);
   result.redirect = "room";
@@ -91,8 +97,9 @@ function joinRoom(req) {
   //join room
   let result = {};
   if (typeof roomlist[req.body.room] != "undefined") {
-    roomlist[req.body.room]["participant_list"].push(req.body.name);
-    result.player = req.body.name;
+    let player = new Player(req.body.name);
+    roomlist[req.body.room]["participantList"].push(player);
+    result.player = player;
     result.message = `Joined Room!`;
     result.redirect = "room";
     result.roomID = req.body.room;
@@ -108,10 +115,9 @@ function joinRoom(req) {
   return result;
 }
 
-function getChatLog(req) {
-  let room = roomlist[req.body.roomID];
+function getGameState(req) {
   let result = {};
-  result.wolflog = room["wolflog"];
+  result.room = roomlist[req.body.roomID];
   result.status = "S";
 
   return result;
@@ -122,7 +128,7 @@ function updateChatLog(req) {
   let msg = req.body.msg;
 
   let formatted = `[${player}]: ${msg}`;
-  roomlist[req.body.room]["wolflog"].push(formatted);
+  roomlist[req.body.room]["chatlog"].push(formatted);
 
   let result = {};
   result.status = "S";
@@ -139,7 +145,6 @@ app.listen(PORT, () => {
 // [END gae_node_request_example]
 
 module.exports = app;
-
 
 function makeid(length, mode) {
   var characters = '';
