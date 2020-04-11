@@ -122,7 +122,7 @@ function updateChatLog(req) {
   let msg = req.body.msg;
 
   let formatted = `[${player}]: ${msg}`;
-  roomlist[req.body.roomID]["wolflog"].push(formatted);
+  roomlist[req.body.room]["wolflog"].push(formatted);
 
   let result = {};
   result.success = "S";

@@ -63,8 +63,6 @@ function redirect(params) {
             if (data.status === "S") {
                 if (typeof (data.redirect) !== 'undefined') {
                     loadPage(data);
-                    let chatSubmitButton = document.getElementById("chat-submit");
-                    chatSubmitButton.addEventListener('click', submitForm, false);
                 }
                 if (typeof(data.clearChatInput) !== 'undefined') {
                     document.getElementById("chat-input").value = "";
@@ -90,6 +88,8 @@ function loadPage(req) {
         .then(response => response.text())
         .then(data => {
             document.getElementById("contentDiv").innerHTML = data;
+            let chatSubmitButton = document.getElementById("chat-submit");
+            chatSubmitButton.addEventListener('click', submitForm, false);
         })
         .catch(err => {
 
