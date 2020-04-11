@@ -24,17 +24,44 @@ function fetch_chatlog(roomID) {
     //         }
     //         hideLoading();
     //     });
-    
-    options.body = params;
+    // options.body = params;
+    // options.method = "POST";
+    // // options.headers = {
+    // //     "Content-Type": "application/x-www-form-urlencoded"
+    // // };
+
+    // fetch(window.location.hostname + '/getChatLog', options)
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log(data)
+    //     })
+    //     .catch(err => ...)
+}
+
+function submitForm(button) {
+    let params = {};
+    params.action = button.id;
+    switch (button.id) {
+        case "create":
+            params.name = document.getElementById("name").value;
+            break;
+        case "join":
+            params.name = document.getElementById("name").value;
+            params.room = document.getElementById("room").value;
+            break;
+    }
+    options.body = JSON.stringify(params);
     options.method = "POST";
-    // options.headers = {
-    //     "Content-Type": "application/x-www-form-urlencoded"
-    // };
-    
-    fetch(window.location.hostname + '/getChatLog', options)
+    options.headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    };
+    fetch(window.location.hostname + '/redirect', options)
         .then(response => response.json())
         .then(data => {
             console.log(data)
         })
-        .catch(err => ...)
+        .catch(err => {
+
+        });
 }
