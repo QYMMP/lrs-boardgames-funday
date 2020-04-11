@@ -6,23 +6,40 @@
     <script src="client.js"></script>
     <!-- Bootstrap CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <!-- Custom Styling -->
+    <link rel="stylesheet" href="../public/assets/css/custom.css">
+    <!-- Parallax Stars CSS -->
+    <link rel="stylesheet" href="../public/assets/css/parallaxstarsanimation.css">
     <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/43caa9dd68.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div id="contentDiv">
-        <h2>狼人杀</h2>
-        <div>
-            <input type="text" id="name" placeholder="Name">
-        </div>
-        <div>
-            <input type="text" id="room" placeholder="Room ID">
-        </div>
-        <div>
-            <button id="create">Create Room</button>
-            <button id="join">Join Room</button>
+    <!--Parallax Stars-->
+    <div id='stars'></div>
+    <div id='stars2'></div>
+    <div id='stars3'></div>
+    <!--Parallax Stars END-->
+    <div id="contentDiv" class="container-fluid h-100">
+        <div class="row justify-content-center align-items-center h-100 mainmenuOuterContainer">
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mainmenuInnerContainer">
+                <h2><i class="fab fa-wolf-pack-battalion"></i> 狼人杀</h2>
+                <div class="form-group">
+                    <input class="form-control form-control-lg" type="text" id="name" placeholder="Your Name?">
+                </div>
+                <div class="form-group">
+                    <input class="form-control form-control-lg" type="text" id="room" placeholder="Enter Room ID">
+                </div>
+                    
+                <button id="join" class="btn btn-info btn-lg btn-block">Join Room</button>
+                <!-- For Host only-->
+                <hr>
+                <div class="col-md-12">
+                    <label>For Host only: </label>
+                    <button id="create" class="btn btn-danger btn-lg btn-block">Create Room</button>
+                </div>
+                <!-- For Host only END-->
+            </div>
         </div>
         <script>
             let createButton = document.getElementById('create');
@@ -32,7 +49,4 @@
         </script>
     </div>
 </body>
-
-
-
 </html>
