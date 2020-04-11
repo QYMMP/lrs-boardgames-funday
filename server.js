@@ -112,7 +112,7 @@ function getChatLog(req) {
   let room = roomlist[req.body.roomID];
   let result = {};
   result.wolflog = room["wolflog"];
-  result.success = "S";
+  result.status = "S";
 
   return result;
 }
@@ -125,7 +125,7 @@ function updateChatLog(req) {
   roomlist[req.body.room]["wolflog"].push(formatted);
 
   let result = {};
-  result.success = "S";
+  result.status = "S";
   result.clearChatInput = true;
   return result;
 }
