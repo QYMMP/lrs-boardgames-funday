@@ -13,9 +13,14 @@ async function getChatLog(roomID) {
     let chatlog = document.getElementById("chatlog");
 
     while (true) {
+        let result = await fetch_chatlog(roomID);
         setTimeout(() => {
-            let result = await fetch_chatlog(roomID);
-            chatlog.innerHTML = result;
+            let message = "";
+            result.forEach(element => {
+                message += element;
+                message += '<br>';
+            });
+            chatlog.innerHTML = message;
         }, 5000);
     }
 }
