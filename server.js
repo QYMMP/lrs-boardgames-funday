@@ -95,7 +95,7 @@ function joinRoom(req) {
     result.player = req.body.name;
     result.message = `Joined Room!`;
     result.redirect = "room";
-    result.roomID = roomID;
+    result.roomID = req.body.room;
     result.status = "S";
   } else {
     result.message = `Room ID (${req.body.room}) does not exist`;
