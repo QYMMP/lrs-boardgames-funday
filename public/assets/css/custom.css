@@ -20,4 +20,13 @@ html, body {
     text-align: left;
     background: #000000;
     padding: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.con_gamearea
+{
+    background: #1b2735;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
