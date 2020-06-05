@@ -18,7 +18,7 @@ html, body {
 .con_gameinfo
 {
     text-align: left;
-    background: #000000;
+    background: #121213;
     padding: 20px;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
@@ -26,7 +26,8 @@ html, body {
 
 .con_gamearea
 {
-    background: #1b2735;
+    background: #26282b;
+    padding: 20px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
 }
