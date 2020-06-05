@@ -14,3 +14,10 @@ html, body {
     border-radius: 25px;
     padding: 50px;
 }
+
+.con_gameinfo
+{
+    text-align: left;
+    background: #000000;
+    padding: 20px;
+}

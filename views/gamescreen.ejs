@@ -1,31 +1,47 @@
 <div id="game-body" class="container-fluid h-100">
     <div class="row justify-content-center align-items-center h-100 mainmenuOuterContainer">
+        <div class="col-lg-10 mainmenuInnerContainer" style="height: 80vh">
             <h2><i class="fab fa-wolf-pack-battalion"></i> 狼人杀</h2>
-            <!-- Game Information -->
-            <div class="col-md-4 mainmenuInnerContainer" id="chatarea">
-                <hr>
-                <div id="room-info">
-                    <h3>Room ID: <%= roomID %></h3>
-                </div>
-                <div id="player-list">
+            <hr>
+            <div class="row">
+                <!-- Game Information -->
+                <div class="col-lg-4 con_gameinfo" id="chatarea">
+                    <div id="room-info">
+                        <h3>Room ID: <%= roomID %></h3>
+                    </div>
+                        <hr>
+                        <h3>Objective:</h3>
+                    <div>
+                        Placeholder for kill all or kill single
+                    </div>
+                        <hr>
+                        <h3>Available Roles:</h3>
+                    <div>
+                        Placeholder
+                    </div>
+                        <hr>
+                        <h3>Player List:</h3>
+                    <div id="player-list">
 
+                    </div>
+                    <input type="hidden" id="roomID" value="<%= roomID %>">
+                    <input type="hidden" id="player" value="<%= player %>">
                 </div>
-                <input type="hidden" id="roomID" value="<%= roomID %>">
-                <input type="hidden" id="player" value="<%= player %>">
-            </div>
-            <!-- Game Information END -->
-            <!-- Game Area -->
-            <div class="col-md-6 mainmenuInnerContainer">
-                <div id="chatlog">
-        
-                </div>
-                <div class="form-group" id="div-chat-entry">
-                    <input class="form-control form-control-lg" type="text" id="chat-input" placeholder="Type your message here.">
-                </div>
+                <!-- Game Information END -->
+                <!-- Game Area -->
+                <div class="col-lg-8">
+                    <div id="chatlog">
+            
+                    </div>
+                    <div class="form-group" id="div-chat-entry">
+                        <input class="form-control form-control-lg" type="text" id="chat-input" placeholder="Type your message here.">
+                    </div>
 
-                <button id="chat-submit" class="btn btn-info btn-lg btn-block">Send Message</button>
+                    <button id="chat-submit" class="btn btn-info btn-lg btn-block">Send Message</button>
+                </div>
+                <!-- Game Area END -->
             </div>
-            <!-- Game Area END -->
+        </div>
     </div>
 </div>
 
